@@ -6,6 +6,7 @@ import ArrowRight from './svgs/ArrowRight';
 import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
+import { instruction } from '../utils/constants';
 
 const PromptInput = () => {
 
@@ -42,8 +43,8 @@ const PromptInput = () => {
     setLoading(true);
     setPromptInput('');
     setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
-    const res = await runChat(promptInput, history);
-    setHistory(res.history);
+    const { response } = await runChat(instruction + promptInput, history);
+    setHistory(prev => [...prev, { role: 'model', parts: [{ text: response }] }]);
     setLoading(false);
   }
 
