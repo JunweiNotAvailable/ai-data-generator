@@ -6,10 +6,11 @@ import ArrowRight from './svgs/ArrowRight';
 import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
-import { instruction } from '../utils/constants';
+import { signIn, useSession } from 'next-auth/react';
 
 const PromptInput = () => {
 
+  const { data: session, status } = useSession();
   const inputRef = useRef(null);
   const { promptInput, setPromptInput, history, setHistory, loading, setLoading } = useHomeState();
   const [isFocused, setIsFocused] = useState(false);
@@ -40,17 +41,21 @@ const PromptInput = () => {
 
   // send the prompt to gemini api
   const sendPrompt = async () => {
+    if (status !== 'authenticated') {
+      signIn('github');
+      return;
+    }
     setLoading(true);
     setPromptInput('');
     setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
-    const { response } = await runChat(instruction + promptInput, history);
+    const { response } = await runChat(promptInput, history);
     setHistory(prev => [...prev, { role: 'model', parts: [{ text: response }] }]);
     setLoading(false);
   }
 
   return (
     <div className={`transition-2 flex items-center pl-5 pr-3 py-3 box-border rounded-3xl border border-slate-300 outline-none ${isFocused ? 'shadow-md bg-slate-100' : 'shadow-sm bg-slate-50'} w-full`} onClick={() => (inputRef.current as any as HTMLElement).focus()}>
-      <textarea autoFocus rows={1} ref={inputRef} placeholder='Your data prompt' className={`${styles.promptInput} scroller resize-none flex-1 placeholder:text-gray-400 text-sm bg-transparent outline-none`} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} value={promptInput} onInput={handleInput} />
+      <textarea rows={1} ref={inputRef} placeholder='Your data prompt' className={`${styles.promptInput} scroller resize-none flex-1 placeholder:text-gray-400 text-sm bg-transparent outline-none`} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} value={promptInput} onInput={handleInput} />
       <button className={`w-4 px-2 py-1 box-content ${promptInput.length === 0 ? '*:stroke-slate-300 *:hover:stroke-slate-300' : '*:stroke-slate-500 *:hover:stroke-slate-800'}`} disabled={promptInput.length === 0} onClick={sendPrompt}><ArrowRight /></button>
     </div>
   )

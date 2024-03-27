@@ -1,0 +1,1 @@
+export const randInt = (a: number, b: number) => Math.floor(Math.random() * (b - a)) + a;

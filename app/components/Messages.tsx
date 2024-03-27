@@ -29,7 +29,7 @@ const Messages: React.FC<Props> = ({ initialHistory }) => {
   }, [history]);
 
   return (
-    history.length === 0 ?
+    history.slice(2).length === 0 ?
       // empty history
       <div>
         <div className='mb-12 font-bold text-4xl text-slate-600 text-center'>Generate data with AI</div>
@@ -37,7 +37,7 @@ const Messages: React.FC<Props> = ({ initialHistory }) => {
       :
       // messages
       <div ref={messagesRef} className='flex-1 flex flex-col items-center w-full scroller mb-2'>
-        {history.map((content, i) => <div key={i} className='flex items-start w-4/5 max-w-2xl mt-8 mb-4'>
+        {history.slice(2).map((content, i) => <div key={i} className='flex items-start w-4/5 max-w-2xl mt-8 mb-4'>
           <div className='mr-4'>
             <div className='rounded-full w-8 aspect-square flex justify-center items-center p-0.5'>
               {content.role === 'model' ?
