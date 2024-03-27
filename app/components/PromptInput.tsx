@@ -31,6 +31,7 @@ const PromptInput = () => {
   const sendPrompt = async () => {
     setLoading(true);
     setPromptInput('');
+    setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
     const res = await runChat(promptInput, history);
     setHistory(res.history);
     setLoading(false);
