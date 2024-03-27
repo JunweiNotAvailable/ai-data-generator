@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-input, button, .transition-2 {
+input, button, textarea, .transition-2 {
   transition: all .2s;
 }
 
@@ -19,6 +19,9 @@ input, button, .transition-2 {
   border: 3px solid transparent;
   background-clip: padding-box;
 }
+.scroller-none::-webkit-scrollbar {
+  width: 0;
+}
 
 ul {
   list-style-type: disc;
@@ -30,6 +33,7 @@ ol {
 /* markdown */
 .markdown-content {
   background: transparent !important;
+  min-width: 0;
 }
 .markdown-content pre .copied {
   background: #c7c8cb !important;
