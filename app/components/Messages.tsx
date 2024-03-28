@@ -84,7 +84,7 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
           </div>}
         </div>
         {/* delete icon */}
-        <div className='sticky bottom-0 w-full flex justify-end pb-2 pr-2'>
+        <div className='sticky bottom-0 w-full bg-transparent flex justify-end pb-2 pr-2'>
           <button onClick={() => setDeleteConfirm(true)} className='delete-confirm rounded-full bg-white flex items-center justify-center border p-2 w-8 aspect-square shadow '><Delete color='#475569' /></button>
           <div className={`${deleteConfirm ? 'block' : 'hidden'} delete-confirm absolute bg-white z-10 rounded p-2 right-4 border shadow-md w-48`} style={{ bottom: '120%' }}>
             <div className='text-sm text-gray-500'>Clear chat history?</div>
