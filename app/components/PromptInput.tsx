@@ -7,7 +7,6 @@ import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
 import { signIn, useSession } from 'next-auth/react';
-import { getChatId } from '../utils/postgre';
 import { instruction, sampleResponse } from '../utils/constants';
 import { Content } from '@google/generative-ai';
 

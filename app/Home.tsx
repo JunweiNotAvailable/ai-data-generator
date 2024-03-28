@@ -1,21 +1,34 @@
 import React from 'react'
-import Messages from './components/Messages';
-import PromptInput from './components/PromptInput';
-import InputButton from './components/InputBottom';
+import { getServerSession } from 'next-auth/next';
+import { Content } from '@google/generative-ai';
+import { getChatHistory } from './utils/postgre';
+import LandingPage from './components/LandingPage';
+import ChatContent from './components/ChatContent';
 
 const Home = async () => {
-  return (
-    <div className='flex flex-1 overflow-hidden'>
-      <main className='flex-1 flex justify-center items-center'>
-        <div className='transition-2 flex flex-col justify-center items-center w-full h-full'>
-          <Messages />
-          <div className='flex flex-col items-center text-center pt-2 sticky bottom-0 w-5/6 max-w-3xl'>
-            <PromptInput />
-            <InputButton />
+
+  const session = await getServerSession();
+  let initialHistory: Content[] = [];
+
+  if (session?.user?.email) {
+    const res = await getChatHistory('New Data Chat', session.user?.email);
+    if (res.rows?.[0]) {
+      initialHistory = res.rows[0].history;
+      // return chat content
+    }
+    return (
+      <div className='flex flex-1 overflow-hidden'>
+        <main className='flex-1 flex justify-center items-center'>
+          <div className='transition-2 flex flex-col justify-center items-center w-full h-full'>
+            <ChatContent initialHistory={initialHistory} />
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    )
+  }
+
+  return (
+    <LandingPage />
   )
 }
 

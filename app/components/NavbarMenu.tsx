@@ -7,6 +7,7 @@ import Out from './svgs/Out';
 import styles from './components.module.css';
 import { useEventListener } from '@iwbam/react-ez';
 import Avatar from './svgs/Avatar';
+import Github from './svgs/Github';
 
 const NavbarMenu = () => {
 
@@ -33,7 +34,7 @@ const NavbarMenu = () => {
         </nav>}
       </div>
       : status === 'unauthenticated' ?
-        <button className='border text-sm py-0.5 px-4 rounded border-slate-300 hover:bg-slate-100 text-slate-600 font-bold' onClick={() => signIn('github')}>Log in</button>
+        <button className='flex items-center border text-sm py-1 px-4 rounded border-slate-300 hover:bg-slate-100 text-slate-600 font-bold' onClick={() => signIn('github')}><span className='block w-4 mr-2'><Github /></span>Log in</button>
         :
         <></>
   )

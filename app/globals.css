@@ -44,6 +44,15 @@ ol {
 .markdown-content code {
   width: 100%;
 }
+.markdown-content code::-webkit-scrollbar {
+  height: 12px;
+}
+.markdown-content code::-webkit-scrollbar-thumb {
+  background: #dbdee0;
+  border-radius: 1rem;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
 .markdown-content code * {
   font-family: "Source Code Pro", monospace;
 }
