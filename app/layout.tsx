@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { HomeStateProvider } from './contexts/HomeContext'
 import { NextAuthProvider } from './provider'
+import Navbar from './components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <HomeStateProvider>
-            {children}
+            <div className='h-svh flex flex-col'>
+              <Navbar />
+              {children}
+            </div>
           </HomeStateProvider>
         </NextAuthProvider>
       </body>

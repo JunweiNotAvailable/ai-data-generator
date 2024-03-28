@@ -62,12 +62,10 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
         <div ref={messagesRef} className='flex-1 flex flex-col items-center w-full scroller'>
           {history.slice(2).map((content, i) => <div key={i} className='flex items-start w-5/6 md:w-4/5 max-w-2xl mt-8 mb-4'>
             <div className='mr-4'>
-              <div className='rounded-full w-8 aspect-square flex justify-center items-center p-0.5'>
-                {content.role === 'model' ?
-                  <Logo />
-                  :
-                  <div className='*:stroke-slate-500 p-1'><Avatar /></div>}
-              </div>
+              {content.role === 'model' ?
+                <div className='w-8 aspect-square flex justify-center items-center p-0.5'><Logo /></div>
+                :
+                <div className='rounded-full bg-gray-200 overflow-hidden w-8 p-2 aspect-square'><Avatar color='#475569' /></div>}
             </div>
             <MarkdownEditor.Markdown className='markdown-content flex-1 mt-1' source={content.parts[0].text} />
           </div>)}
@@ -84,8 +82,8 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
           </div>}
         </div>
         {/* delete icon */}
-        <div className='sticky bottom-0 w-full flex justify-end pb-2 pr-2'>
-          <button onClick={() => setDeleteConfirm(true)} className='delete-confirm rounded-full bg-white flex items-center justify-center border p-2 w-8 aspect-square shadow '><Delete color='#475569' /></button>
+        <div className='sticky bottom-0 w-full flex justify-end pb-0.5 pr-2'>
+          <button onClick={() => setDeleteConfirm(true)} className='delete-confirm rounded-full bg-white flex items-center justify-center border p-2 w-8 aspect-square shadow'><Delete color='#475569' /></button>
           <div className={`${deleteConfirm ? 'block' : 'hidden'} delete-confirm absolute bg-white z-10 rounded p-2 right-4 border shadow-md w-48`} style={{ bottom: '120%' }}>
             <div className='text-sm text-gray-500'>Clear chat history?</div>
             <div className='flex justify-end mt-2'>
