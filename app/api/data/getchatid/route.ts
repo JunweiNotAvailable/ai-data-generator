@@ -9,8 +9,8 @@ export async function GET (request: Request) {
       const result = await getChatId(chatName, userEmail);
       return new Response(JSON.stringify(result))
     }
-    return new NextResponse(JSON.stringify({ error: "'chatName' or 'userEmail' not defined" }))
+    return new NextResponse(JSON.stringify({ error: "Failed getting data" }))
   } catch (error) {
-    return new NextResponse(JSON.stringify({ error: 'Data not found' }))
+    return new NextResponse(JSON.stringify({ error: 'Failed getting data' }))
   }
 }

@@ -9,7 +9,7 @@ export async function DELETE (request: Request) {
       await deleteChat(chatName, userEmail);
       return new Response(JSON.stringify({ message: 'Chat deleted' }))
     }
-    return new NextResponse(JSON.stringify({ error: "'chatName' or 'userEmail' not defined" }))
+    return new NextResponse(JSON.stringify({ error: "Failed deleting chat" }))
   } catch (error) {
     console.log(error)
     return new NextResponse(JSON.stringify({ error: 'Failed deleting chat' }))

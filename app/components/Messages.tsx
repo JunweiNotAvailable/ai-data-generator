@@ -86,8 +86,8 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
         {/* delete icon */}
         <div className='sticky bottom-0 w-full flex justify-end pb-2 pr-2'>
           <button onClick={() => setDeleteConfirm(true)} className='delete-confirm rounded-full bg-white flex items-center justify-center border p-2 w-8 aspect-square shadow '><Delete color='#475569' /></button>
-          <div className={`${deleteConfirm ? 'block' : 'hidden'} delete-confirm absolute bg-white z-10 rounded p-2 right-2 border shadow-md w-48`} style={{ bottom: '120%' }}>
-            <div className='text-sm'>Clear chat history?</div>
+          <div className={`${deleteConfirm ? 'block' : 'hidden'} delete-confirm absolute bg-white z-10 rounded p-2 right-4 border shadow-md w-48`} style={{ bottom: '120%' }}>
+            <div className='text-sm text-gray-500'>Clear chat history?</div>
             <div className='flex justify-end mt-2'>
               <button className='bg-red-400 disabled:bg-red-200 flex items-center justify-center text-white text-xs py-1 px-3 rounded shadow-sm' onClick={deleteHistory} disabled={deleting}>{deleting ? <span className='block w-4'><Spinner color='#fff' /></span> : 'Delete'}</button>
             </div>

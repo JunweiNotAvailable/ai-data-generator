@@ -9,7 +9,7 @@ export async function POST (request: Request) {
       await insertMessage(chatName, messages, userEmail);
       return new Response(JSON.stringify({ message: "Messages inserted successfully" }));
     }
-    return new NextResponse(JSON.stringify({ error: "'chatName', 'messages' or 'userEmail' not defined" }))
+    return new NextResponse(JSON.stringify({ error: "Failed inserting data" }))
   } catch (error) {
     console.log(error)
     return new NextResponse(JSON.stringify({ error: 'Failed inserting data' }))
