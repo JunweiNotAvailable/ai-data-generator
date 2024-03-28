@@ -21,8 +21,8 @@ const ChatContent = ({ initialHistory }: { initialHistory: Content[] }) => {
   return (
     <>
       <Messages initialHistory={initialHistory} />
-      <div className='flex flex-col items-center text-center pt-2 sticky bottom-0 w-5/6 max-w-3xl'>
-        <PromptInput />
+      <div className='flex flex-col items-center text-center pt-2 sticky bottom-0 w-11/12 md:w-5/6 max-w-3xl'>
+        <PromptInput initialHistory={initialHistory} />
         <InputBottom />
       </div>
     </>

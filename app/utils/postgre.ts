@@ -63,3 +63,18 @@ export const getChatHistory = async (chatName: string, userEmail: string) => {
     await client.end();
   }
 }
+
+////// DELETE //////
+
+export const deleteChat = async (chatName: string, userEmail: string) => {
+  const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
+  await client.connect();
+  try {
+    await client.sql`DELETE FROM chat WHERE name = ${chatName} AND user_email = ${userEmail}`;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error getting history');
+  } finally {
+    await client.end();
+  }
+}

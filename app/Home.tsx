@@ -14,11 +14,11 @@ const Home = async () => {
     const res = await getChatHistory('New Data Chat', session.user?.email);
     if (res.rows?.[0]) {
       initialHistory = res.rows[0].history;
-      // return chat content
     }
+    // return chat content
     return (
-      <div className='flex flex-1 overflow-hidden'>
-        <main className='flex-1 flex justify-center items-center'>
+      <div className='flex flex-1 overflow-hidden w-screen'>
+        <main className='flex-1 flex justify-center items-center w-full'>
           <div className='transition-2 flex flex-col justify-center items-center w-full h-full'>
             <ChatContent initialHistory={initialHistory} />
           </div>

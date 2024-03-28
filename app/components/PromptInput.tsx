@@ -10,7 +10,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { instruction, sampleResponse } from '../utils/constants';
 import { Content } from '@google/generative-ai';
 
-const PromptInput = () => {
+const PromptInput = ({ initialHistory }: { initialHistory: Content[] }) => {
 
   const { data: session, status } = useSession();
   const inputRef = useRef(null);
@@ -50,8 +50,8 @@ const PromptInput = () => {
     setLoading(true);
     setPromptInput('');
     // Check if chat exist
-    const res = await (await fetch(`/api/data/getchatid?chatName=New%20Data%20Chat&userEmail=${session.user?.email}`)).json();
-    if (res.rows && res.rowCount !== 0) { // chat exist
+    const chatExist = initialHistory.length !== 0;
+    if (chatExist) { // chat exist
       setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
     } else { // not exist -> create chat
       const initialHistory: Content[] = [{ role: 'user', parts: [{ text: instruction }] }, { role: 'model', parts: [{ text: sampleResponse }] }];
