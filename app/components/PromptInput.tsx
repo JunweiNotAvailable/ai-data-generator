@@ -7,6 +7,9 @@ import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
 import { signIn, useSession } from 'next-auth/react';
+import { getChatId } from '../utils/postgre';
+import { instruction, sampleResponse } from '../utils/constants';
+import { Content } from '@google/generative-ai';
 
 const PromptInput = () => {
 
@@ -47,8 +50,31 @@ const PromptInput = () => {
     }
     setLoading(true);
     setPromptInput('');
-    setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
+    // Check if chat exist
+    const res = await (await fetch(`/api/data/getchatid?chatName=New%20Data%20Chat&userEmail=${session.user?.email}`)).json();
+    if (res.rows && res.rowCount !== 0) { // chat exist
+      setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
+    } else { // not exist -> create chat
+      const initialHistory: Content[] = [{ role: 'user', parts: [{ text: instruction }] }, { role: 'model', parts: [{ text: sampleResponse }] }];
+      setHistory([...initialHistory, { role: 'user', parts: [{ text: promptInput }] }]);
+      await fetch('api/data/insertchat', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+          name: 'New Data Chat',
+          history: initialHistory,
+          userEmail: session.user?.email,
+        })
+      });
+    }
     const { response } = await runChat(promptInput, history);
+    // Update chat in database
+    const newMessages: Content[] = [ { role: 'user', parts: [{ text: promptInput }] }, { role: 'model', parts: [{ text: response }] } ];
+    await fetch('api/data/insertmessage', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+        chatName: 'New Data Chat',
+        messages: newMessages,
+        userEmail: session.user?.email,
+      })
+    });
     setHistory(prev => [...prev, { role: 'model', parts: [{ text: response }] }]);
     setLoading(false);
   }

@@ -7,25 +7,31 @@ import MarkdownEditor from '@uiw/react-markdown-editor'
 import Logo from './svgs/Logo'
 import Avatar from './svgs/Avatar'
 import styles from './components.module.css'
+import { useSession } from 'next-auth/react'
+import { useAsyncEffect } from '@iwbam/react-ez'
 
-interface Props {
-  initialHistory: Content[]
-}
-
-const Messages: React.FC<Props> = ({ initialHistory }) => {
+const Messages = () => {
 
   const messagesRef = useRef(null);
+  const { data: session, status } = useSession();
   const { history, setHistory, loading } = useHomeState();
 
   // Setup initial history messages
-  useEffect(() => setHistory(initialHistory), [initialHistory]);
+  useAsyncEffect(async () => {
+    if (status === 'authenticated') {
+      const res = await (await fetch(`api/data/getchathistory?chatName=New%20Data%20Chat&userEmail=${session?.user?.email}`)).json();
+      if (res.rows?.[0]) {
+        const initialHistory: Content[] = res.rows[0].history;
+        setHistory(initialHistory);
+      }
+    }
+  }, [status]);
 
   // scroll to bottom when history changes
   useEffect(() => {
     if (!messagesRef.current) return;
-    const isFirst = history.length === initialHistory.length;
     const listElement = messagesRef.current as HTMLElement;
-    listElement.scrollTo({ top: listElement.scrollHeight, behavior: isFirst ? 'instant' : 'smooth' });
+    listElement.scrollTo({ top: listElement.scrollHeight, behavior: 'smooth' });
   }, [history]);
 
   return (
