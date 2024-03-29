@@ -1,1 +1,2 @@
 export const randInt = (a: number, b: number) => Math.floor(Math.random() * (b - a)) + a;
+export const randString = (length: number) => Array.from({ length: length }, () => Math.random().toString(36).charAt(2)).join('');

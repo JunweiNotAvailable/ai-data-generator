@@ -10,6 +10,8 @@ import { useEventListener } from '@iwbam/react-ez'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Logo from './Logo'
+import { DataProps } from '../utils/interfaces'
+import { randString } from '../utils/functions'
 
 const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
 
@@ -50,11 +52,23 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
   }
 
   // Generate data with the sample
-  const generateData = async () => {
+  const generateData = async (i: number) => {
     setGenerating(true);
     // Create a data in database
+    const filename = randString(8) + '.txt';
+    const data: DataProps = {
+      name: 'New Data',
+      user_email: session?.user?.email as string,
+      prompt: history[i - 1].parts[0].text as string,
+      sample: history[i].parts[0].text as string,
+      filename: filename,
+      generating_step: 0
+    };
+    const result = await (await fetch(`/api/data/insertdata`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })).json();
     // Navigate to data information page
-    setGenerating(false);
+    if (result.id) {
+      router.push(`/data/${result.id}`);
+    }
   }
 
   return (
@@ -77,7 +91,7 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
             <div className='flex-1 mt-1 min-w-0'>
               <MarkdownEditor.Markdown className='markdown-content' source={content.parts[0].text} />
               {content.role === 'model' && <div className='flex justify-center pt-4'>
-                <button onClick={generateData} className='border py-0.5 px-4 rounded text-sm text-white hover:bg-slate-700 bg-slate-600 font-semibold' disabled={generating}>Use sample</button>
+                <button onClick={() => generateData(i)} className='flex items-center justify-center border py-0.5 disabled:py-1 px-4 disabled:px-8 rounded text-sm text-white hover:bg-slate-700 bg-slate-600 disabled:bg-slate-300 font-semibold' disabled={generating}>{generating ? <span className='block w-4'><Spinner color='#fff' /></span> : 'Use sample'}</button>
               </div>}
             </div>
           </div>)}

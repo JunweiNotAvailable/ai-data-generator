@@ -4,4 +4,5 @@ export interface DataProps {
   prompt: string
   sample: string
   filename: string
+  generating_step: number
 }

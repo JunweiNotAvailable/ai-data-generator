@@ -21,9 +21,10 @@ export const insertChat = async (chatName: string, initialHistory: Content[], us
 export const insertData = async (dataInfo: DataProps) => {
   const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
   await client.connect();
-  const { name, user_email, prompt, sample, filename } = dataInfo;
+  const { name, user_email, prompt, sample, filename, generating_step } = dataInfo;
   try {
-    await client.sql`INSERT INTO data (name, user_email, prompt, sample, filename) VALUES (${name}, ${user_email}, ${prompt}, ${sample}, ${filename});`;
+    const data = await client.sql`INSERT INTO data (name, user_email, prompt, sample, filename, generating_step) VALUES (${name}, ${user_email}, ${prompt}, ${sample}, ${filename}, ${generating_step}) RETURNING id;`;
+    return data.rows[0].id;
   } catch (error) {
     console.error(error);
     throw new Error('Error inserting data');
