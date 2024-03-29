@@ -35,6 +35,12 @@ ol {
   background: transparent !important;
   min-width: 0;
 }
+.markdown-content * {
+  background: transparent !important;
+}
+.markdown-content code {
+  background: #f6f8fa !important;
+}
 .markdown-content pre .copied {
   background: #c7c8cb !important;
 }
@@ -55,6 +61,7 @@ ol {
 }
 .markdown-content code * {
   font-family: "Source Code Pro", monospace;
+  font-size: 15px;
 }
 .markdown-content p, .markdown-content li {
   font-size: 15px !important;
@@ -67,4 +74,24 @@ ol {
 }
 .markdown-content h3 {
   font-size: 18px !important;
+}
+
+.markdown-content.small code {
+  background: #000;
+}
+.markdown-content.small code * {
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+}
+.markdown-content.small p, .markdown-content.small li {
+  font-size: 13px !important;
+}
+.markdown-content.small h1 {
+  font-size: 22px !important;
+}
+.markdown-content.small h2 {
+  font-size: 18px !important;
+}
+.markdown-content.small h3 {
+  font-size: 16px !important;
 }

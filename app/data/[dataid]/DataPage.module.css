@@ -1,0 +1,21 @@
+
+.container {
+  --flip-duration: .5s;
+  transform-style: preserve-3d;
+  transition: all var(--flip-duration);
+}
+
+.front {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
