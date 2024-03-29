@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { getServerSession } from 'next-auth/next';
-import DataClient from './DataClient';
+import LoadingData from './LoadingData';
+import RedirectLogin from '../components/RedirectLogin';
 
 const Data = async () => {
 
@@ -9,17 +10,13 @@ const Data = async () => {
   if (session) {
     return (
       <div className='w-full flex-1 flex flex-col items-center justify-center'>
-        <DataClient />
+        <LoadingData session={session} />
       </div>
     )
   }
 
   // Login if not authenticated
-  return (
-    <Fragment>
-      <meta httpEquiv="refresh" content={`0; url=/login`} />
-    </Fragment>
-  )
+  return <RedirectLogin />
 }
 
 export default Data

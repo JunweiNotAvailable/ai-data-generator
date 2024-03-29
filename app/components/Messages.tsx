@@ -19,6 +19,7 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
   const messagesRef = useRef(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [generating, setGenerating] = useState(false);
 
   useEventListener('click', (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -48,8 +49,16 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
     setDeleting(false);
   }
 
+  // Generate data with the sample
+  const generateData = async () => {
+    setGenerating(true);
+    // Create a data in database
+    // Navigate to data information page
+    setGenerating(false);
+  }
+
   return (
-    history.slice(2).length === 0 ?
+    history.length === 0 ?
       // empty history
       <div>
         <div className='mb-12 font-bold text-4xl text-slate-600 text-center'>Generate data with AI</div>
@@ -58,17 +67,22 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
       // messages
       <div className='flex-1 flex flex-col w-full mb-2 relative overflow-hidden'>
         <div ref={messagesRef} className='flex-1 flex flex-col items-center w-full scroller'>
-          {history.slice(2).map((content, i) => <div key={i} className='flex items-start w-5/6 md:w-4/5 max-w-2xl mt-8 mb-4'>
+          {history.map((content, i) => <div key={i} className='flex items-start w-5/6 md:w-4/5 max-w-2xl py-8 border-b'>
             <div className='mr-4'>
               {content.role === 'model' ?
                 <div className='w-8 aspect-square flex justify-center items-center p-0.5'><Logo /></div>
                 :
                 <div className='rounded-full bg-gray-200 overflow-hidden w-8 p-2 aspect-square'><Avatar color='#475569' /></div>}
             </div>
-            <MarkdownEditor.Markdown className='markdown-content flex-1 mt-1' source={content.parts[0].text} />
+            <div className='flex-1 mt-1 min-w-0'>
+              <MarkdownEditor.Markdown className='markdown-content' source={content.parts[0].text} />
+              {content.role === 'model' && <div className='flex justify-center pt-4'>
+                <button onClick={generateData} className='border py-0.5 px-4 rounded text-sm text-white hover:bg-slate-700 bg-slate-600 font-semibold' disabled={generating}>Use sample</button>
+              </div>}
+            </div>
           </div>)}
           {/* Loading message */}
-          {loading && <div className='flex items-start w-4/5 max-w-2xl mt-8 mb-4'>
+          {loading && <div className='flex items-start w-4/5 max-w-2xl my-8'>
             <div className='mr-4'>
               <div className='rounded-full w-8 aspect-square flex justify-center items-center p-0.5'><Logo /></div>
             </div>
