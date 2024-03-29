@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { useHomeState } from '../contexts/HomeContext';
-import ArrowRight from './svgs/ArrowRight';
+import { ArrowRight } from '../utils/svgs';
 import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
@@ -66,7 +66,7 @@ const PromptInput = ({ initialHistory }: { initialHistory: Content[] }) => {
     }
     const { response } = await runChat(promptInput, history);
     // Update chat in database
-    const newMessages: Content[] = [ { role: 'user', parts: [{ text: promptInput }] }, { role: 'model', parts: [{ text: response }] } ];
+    const newMessages: Content[] = [{ role: 'user', parts: [{ text: promptInput }] }, { role: 'model', parts: [{ text: response }] }];
     await fetch('api/data/insertmessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         chatName: 'New Data Chat',

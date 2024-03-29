@@ -4,14 +4,12 @@ import { Content } from '@google/generative-ai'
 import React, { useEffect, useRef, useState } from 'react'
 import { useHomeState } from '../contexts/HomeContext'
 import MarkdownEditor from '@uiw/react-markdown-editor'
-import Logo from './svgs/Logo'
-import Avatar from './svgs/Avatar'
+import { Avatar, Delete, Spinner } from '../utils/svgs'
 import styles from './components.module.css'
-import Delete from './svgs/Delete'
 import { useEventListener } from '@iwbam/react-ez'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import Spinner from './svgs/Spinner'
+import Logo from './Logo'
 
 const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
 

@@ -15,8 +15,14 @@ const config: Config = {
       },
       fontFamily: {
         'poppins': ["'Poppins'", 'sans-serif']
+      },
+      colors: {
+        'github': '#24292E'
       }
     },
+    screens: {
+      md: '960px',
+    }
   },
   plugins: [],
 }

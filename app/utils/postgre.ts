@@ -1,5 +1,6 @@
 import { Content } from '@google/generative-ai';
 import { createClient } from '@vercel/postgres';
+import { DataProps } from './interfaces';
 
 ////// INSERT //////
 
@@ -12,6 +13,20 @@ export const insertChat = async (chatName: string, initialHistory: Content[], us
   } catch (error) {
     console.error(error);
     throw new Error('Error inserting chat');
+  } finally {
+    await client.end();
+  }
+}
+
+export const insertData = async (dataInfo: DataProps) => {
+  const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
+  await client.connect();
+  const { name, user_email, prompt, sample, filename } = dataInfo;
+  try {
+    await client.sql`INSERT INTO data (name, user_email, prompt, sample, filename) VALUES (${name}, ${user_email}, ${prompt}, ${sample}, ${filename});`;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error inserting data');
   } finally {
     await client.end();
   }
@@ -56,6 +71,34 @@ export const getChatHistory = async (chatName: string, userEmail: string) => {
   try {
     const result = await client.sql`SELECT history FROM chat WHERE name = ${chatName} AND user_email = ${userEmail}`;
     return result
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error getting history');
+  } finally {
+    await client.end();
+  }
+}
+
+export const getAllData = async (userEmail: string) => {
+  const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
+  await client.connect();
+  try {
+    const result = await client.sql`SELECT id, name FROM data WHERE user_email = ${userEmail}`;
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error getting history');
+  } finally {
+    await client.end();
+  }
+}
+
+export const getDataInfo = async (id: number) => {
+  const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
+  await client.connect();
+  try {
+    const result = await client.sql`SELECT * FROM data WHERE id = ${id}`;
+    return result;
   } catch (error) {
     console.error(error);
     throw new Error('Error getting history');
