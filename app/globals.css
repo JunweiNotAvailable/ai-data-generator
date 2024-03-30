@@ -12,9 +12,19 @@ input, button, textarea, .transition-2 {
 }
 .scroller::-webkit-scrollbar {
   width: 12px;
+  height: 10px;
 }
 .scroller::-webkit-scrollbar-thumb {
   background: #dbdee0;
+  border-radius: 1rem;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.scroller-light::-webkit-scrollbar {
+  width: 10px;
+}
+.scroller-light::-webkit-scrollbar-thumb {
+  background: #eceef0;
   border-radius: 1rem;
   border: 3px solid transparent;
   background-clip: padding-box;

@@ -14,3 +14,11 @@ export const promptSamples = [
   "The input is sentences about a travel destination, and the output is all locations and entities.",
   "The input is an article, and the output is: 1. The summary 2. Classify the summary as either 'informative' or 'biased'.",
 ];
+
+export const moreExamplesPrompts = [
+  'Based on the description and the template, provide 5 more examples',
+  'I believe there are more possibilities, provide 5 more',
+  '5 more examples, and no similar data, please',
+  'Please give me 5 more examples, try to have more different kinds of data',
+  'Last 5 more examples',
+];

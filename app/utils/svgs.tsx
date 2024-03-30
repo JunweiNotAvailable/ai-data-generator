@@ -80,3 +80,13 @@ export const Spinner = ({ color }: { color?: string }) => {
     </motion.div>
   )
 }
+
+export const Download = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 66 70" fill="none">
+      <path d="M33 3L33.1343 29.8657L33.25 53" stroke={color || "black"} strokeWidth="6" strokeLinecap="round" />
+      <path d="M54.5 34.8507L33.25 53L12 34.8507" stroke={color || "black"} strokeWidth="6" strokeLinecap="round" />
+      <path d="M3 67H62.5" stroke={color || "black"} strokeWidth="6" strokeLinecap="round" />
+    </svg>
+  )
+}

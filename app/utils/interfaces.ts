@@ -1,4 +1,5 @@
 export interface DataProps {
+  id?: number
   name: string
   user_email: string
   prompt: string

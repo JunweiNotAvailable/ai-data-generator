@@ -3,6 +3,7 @@
   --flip-duration: .5s;
   transform-style: preserve-3d;
   transition: all var(--flip-duration);
+  height: 320px;
 }
 
 .front {

@@ -7,8 +7,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react'
 import Sample from './Sample';
+import DataResult from '../../components/DataResult';
+import DataProcess from '@/app/components/DataProcess';
 
-const DataPage = async ({ params }: { params: { dataid: number } }) => {
+const DataPage = async ({ params }: { params: { dataid: string } }) => {
 
   const session = await getServerSession();
 
@@ -16,7 +18,7 @@ const DataPage = async ({ params }: { params: { dataid: number } }) => {
 
   // Get data information
   const allData = (await getAllData(session.user?.email as string)).rows as { id: number, name: string }[];
-  const result = await getDataInfo(params.dataid);
+  const result = await getDataInfo(parseInt(params.dataid));
   // no data found
   if (result.rowCount === 0) {
     notFound();
@@ -33,21 +35,32 @@ const DataPage = async ({ params }: { params: { dataid: number } }) => {
     )
   }
 
+  // Get file from s3
+  let content = '';
+  try {
+    const bytes = (await (await fetch(`${process.env.s3ApiUrl}?bucket=gedata-bucket&path=${data.filename}`)).json()).content;
+    content = String.fromCharCode(...bytes)
+  } catch (error) {
+    console.log('Failed getting data');
+  }
+
   return (
     <div className='flex w-full flex-1 p-4 bg-slate-50 scroller'>
       <aside className='w-56 p-2 scroller sticky top-0'>
         {allData.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded bg-slate-200'>{d.name}</Link>)}
       </aside>
-      <main className='flex-1 ml-4 px-8 py-4 min-w-0 scroller rounded-md'>
+      <main className='flex-1 ml-4 px-8 my-4 pb-4 min-w-0 scroller rounded-md'>
+        {data.generating_step <= 100 && <DataProcess data={data} />}
         <h2 className='font-bold text-lg'>{data.name}</h2>
         {/* prompt */}
         <div className='text-sm font-semibold mt-4'>Prompt</div>
-        <div className='rounded py-2 px-3 bg-white border border-slate-100 shadow-sm mt-1'>
+        <div className='rounded py-2 px-3 bg-white border shadow-sm mt-1'>
           <MarkdownClient className={'markdown-content small'} source={data.prompt} />
         </div>
         {/* sample */}
         <Sample data={data} />
         {/* data */}
+        <DataResult data={data} isGenerating={data.generating_step <= 100} content={content} />
       </main>
     </div>
   )

@@ -19,11 +19,11 @@ const Sample = ({ data }: { data: DataProps }) => {
         </div>
       </div>
       {/* flip */}
-      <div className={`${styles.container} mt-1 relative ${showing === 'text' ? styles.flip : ''}`}>
-        <div className={`${styles.front} absolute w-full rounded py-2 px-3 bg-white border border-slate-100 shadow-sm`}>
+      <div className={`${styles.container} mt-2 relative ${showing === 'text' ? styles.flip : ''}`}>
+        <div className={`${styles.front} absolute scroller scroller-light h-full w-full rounded py-2 px-3 bg-white border shadow-sm`}>
           <MarkdownClient className={'markdown-content small'} source={data.sample} />
         </div>
-        <div className={`${styles.back} absolute w-full rounded py-2 px-3 bg-white border border-slate-100 shadow-sm`}>
+        <div className={`${styles.back} absolute scroller scroller-light h-full w-full rounded py-2 px-3 bg-white border shadow-sm`}>
           <div className='text-xs whitespace-pre-wrap'>{data.sample}</div>
         </div>
       </div>
