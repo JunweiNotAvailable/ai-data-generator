@@ -16,7 +16,7 @@ const LoadingData = ({ session }: { session: Session }) => {
     const result: QueryResult<QueryResultRow> = await (await fetch(`/api/data/getalldata?userEmail=${session.user?.email}`)).json();
     if (result.rows) { // fetching data successfully
       if (result.rowCount === 0) { // no custom data
-        router.push('/data/eg');
+        router.push('/data/empty');
       } else { // return first data page
         router.push(`/data/${result.rows[0].id}`);
       }

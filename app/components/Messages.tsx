@@ -82,7 +82,7 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
       <div className='flex-1 flex flex-col w-full mb-2 relative overflow-hidden'>
         <div ref={messagesRef} className='flex-1 flex flex-col items-center w-full scroller'>
           {history.map((content, i) => <div key={i} className='flex items-start w-5/6 md:w-4/5 max-w-2xl py-8 border-b'>
-            <div className='mr-4'>
+            <div className='mr-4 sticky top-2'>
               {content.role === 'model' ?
                 <div className='w-8 aspect-square flex justify-center items-center p-0.5'><Logo /></div>
                 :

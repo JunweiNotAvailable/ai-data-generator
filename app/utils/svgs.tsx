@@ -90,3 +90,22 @@ export const Download = ({ color }: { color?: string }) => {
     </svg>
   )
 }
+
+export const Menu = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 74 57" fill="none">
+      <path d="M4 4H70" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+      <path d="M4 28H70" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+      <path d="M4 53H70" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export const Back = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 68 57" fill="none">
+      <path d="M64 52.7679C64 52.7679 36.9649 28.9227 36.9649 28.3839C36.9649 27.8452 64 4.00001 64 4.00001" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+      <path d="M31.0351 52.7679C31.0351 52.7679 4 28.9227 4 28.3839C4 27.8452 31.0351 4.00001 31.0351 4.00001" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+    </svg>
+  )
+}

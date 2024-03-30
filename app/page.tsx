@@ -2,7 +2,7 @@ import React from 'react'
 import { getServerSession } from 'next-auth/next';
 import { Content } from '@google/generative-ai';
 import { getChatHistory } from './utils/postgre';
-import LandingPage from './components/LandingPage';
+import LandingPage from './LandingPage';
 import ChatContent from './components/ChatContent';
 
 const Home = async () => {

@@ -9,6 +9,7 @@ import React from 'react'
 import Sample from './Sample';
 import DataResult from '../../components/DataResult';
 import DataProcess from '@/app/components/DataProcess';
+import MobileSidebar from './MobileSidebar';
 
 const DataPage = async ({ params }: { params: { dataid: string } }) => {
 
@@ -17,7 +18,10 @@ const DataPage = async ({ params }: { params: { dataid: string } }) => {
   if (!session) return <RedirectLogin />
 
   // Get data information
-  const allData = (await getAllData(session.user?.email as string)).rows as { id: number, name: string }[];
+  const dataList = (await getAllData(session.user?.email as string)).rows as { id: number, name: string }[];
+  if (!parseInt(params.dataid)) {
+    notFound();
+  }
   const result = await getDataInfo(parseInt(params.dataid));
   // no data found
   if (result.rowCount === 0) {
@@ -45,11 +49,15 @@ const DataPage = async ({ params }: { params: { dataid: string } }) => {
   }
 
   return (
-    <div className='flex w-full flex-1 p-4 bg-slate-50 scroller'>
-      <aside className='w-56 p-2 scroller sticky top-0'>
-        {allData.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded bg-slate-200'>{d.name}</Link>)}
+    <div className='flex flex-col md:flex-row w-full flex-1 py-4 md:px-4 bg-slate-50 scroller relative'>
+      {/* mobile sidebar */}
+      <MobileSidebar dataList={dataList} />
+      {/* sidebar */}
+      <aside className='hidden md:flex flex-col w-56 p-2 scroller sticky top-0'>
+        {dataList.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded bg-slate-200'>{d.name}</Link>)}
       </aside>
-      <main className='flex-1 ml-4 px-8 my-4 pb-4 min-w-0 scroller rounded-md'>
+      {/* main */}
+      <main className='flex-1 md:ml-4 px-8 md:my-4 md:pb-4 min-w-0 scroller rounded-md'>
         {data.generating_step <= 100 && <DataProcess data={data} />}
         <h2 className='font-bold text-lg'>{data.name}</h2>
         {/* prompt */}
