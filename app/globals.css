@@ -12,9 +12,19 @@ input, button, textarea, .transition-2 {
 }
 .scroller::-webkit-scrollbar {
   width: 12px;
+  height: 10px;
 }
 .scroller::-webkit-scrollbar-thumb {
   background: #dbdee0;
+  border-radius: 1rem;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.scroller-light::-webkit-scrollbar {
+  width: 10px;
+}
+.scroller-light::-webkit-scrollbar-thumb {
+  background: #eceef0;
   border-radius: 1rem;
   border: 3px solid transparent;
   background-clip: padding-box;
@@ -34,6 +44,12 @@ ol {
 .markdown-content {
   background: transparent !important;
   min-width: 0;
+}
+.markdown-content * {
+  background: transparent !important;
+}
+.markdown-content code {
+  background: #f6f8fa !important;
 }
 .markdown-content pre .copied {
   background: #c7c8cb !important;
@@ -55,6 +71,7 @@ ol {
 }
 .markdown-content code * {
   font-family: "Source Code Pro", monospace;
+  font-size: 15px;
 }
 .markdown-content p, .markdown-content li {
   font-size: 15px !important;
@@ -67,4 +84,24 @@ ol {
 }
 .markdown-content h3 {
   font-size: 18px !important;
+}
+
+.markdown-content.small code {
+  background: #000;
+}
+.markdown-content.small code * {
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+}
+.markdown-content.small p, .markdown-content.small li {
+  font-size: 13px !important;
+}
+.markdown-content.small h1 {
+  font-size: 22px !important;
+}
+.markdown-content.small h2 {
+  font-size: 18px !important;
+}
+.markdown-content.small h3 {
+  font-size: 16px !important;
 }

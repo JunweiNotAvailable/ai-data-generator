@@ -6,7 +6,7 @@ import Messages from './Messages'
 import PromptInput from './PromptInput'
 import InputBottom from './InputBottom'
 import { useSession } from 'next-auth/react';
-import Logo from './svgs/Logo';
+import Logo from './Logo';
 
 const ChatContent = ({ initialHistory }: { initialHistory: Content[] }) => {
 

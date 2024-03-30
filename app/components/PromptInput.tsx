@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { useHomeState } from '../contexts/HomeContext';
-import ArrowRight from './svgs/ArrowRight';
+import { ArrowRight } from '../utils/svgs';
 import { runChat } from '../gemini';
 import { useEventListener } from '@iwbam/react-ez';
 import styles from './components.module.css'
@@ -27,7 +27,7 @@ const PromptInput = ({ initialHistory }: { initialHistory: Content[] }) => {
 
   // handle keyboard event
   useEventListener('keydown', async (e: KeyboardEvent) => {
-    if (e.shiftKey && e.key === 'Enter') {
+    if (isFocused && e.shiftKey && e.key === 'Enter') {
       setPromptInput(prev => prev + '\n');
     } else if (e.key === 'Enter' && isFocused) {
       await sendPrompt();
@@ -49,24 +49,22 @@ const PromptInput = ({ initialHistory }: { initialHistory: Content[] }) => {
     }
     setLoading(true);
     setPromptInput('');
+    setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
     // Check if chat exist
     const chatExist = initialHistory.length !== 0;
-    if (chatExist) { // chat exist
-      setHistory(prev => [...prev, { role: 'user', parts: [{ text: promptInput }] }]);
-    } else { // not exist -> create chat
-      const initialHistory: Content[] = [{ role: 'user', parts: [{ text: instruction }] }, { role: 'model', parts: [{ text: sampleResponse }] }];
-      setHistory([...initialHistory, { role: 'user', parts: [{ text: promptInput }] }]);
+    if (!chatExist) { // chat exist
       await fetch('api/data/insertchat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
           name: 'New Data Chat',
-          history: initialHistory,
+          history: [],
           userEmail: session.user?.email,
         })
       });
     }
-    const { response } = await runChat(promptInput, history);
+    const instructionHistory: Content[] = [ { role: 'user', parts: [{ text: instruction }] }, { role: 'model', parts: [{ text: sampleResponse }] } ];
+    const { response } = await runChat(promptInput, [...instructionHistory, ...history]);
     // Update chat in database
-    const newMessages: Content[] = [ { role: 'user', parts: [{ text: promptInput }] }, { role: 'model', parts: [{ text: response }] } ];
+    const newMessages: Content[] = [{ role: 'user', parts: [{ text: promptInput }] }, { role: 'model', parts: [{ text: response }] }];
     await fetch('api/data/insertmessage', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         chatName: 'New Data Chat',

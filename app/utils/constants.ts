@@ -4,15 +4,21 @@ export const instruction = 'Given some descriptions, generate input and output s
 '```\n' +
 '**INPUT:** {Sample Input Here}\n\n' +
 '**OUTPUT:** {Sample Output Here}\n' + 
-'```\n' +
-'Description:\n';
+'```\n';
 
 export const sampleResponse = "I'd be glad to help you format input and output samples for AI training!";
 
 export const promptSamples = [
-  'A dataset of text reviews of movies, with labels indicating whether each review is either positive or negative.',
-  "Write a short text snippet about a restaurant experience and classify it as either 'positive' or 'negative'.",
-  "Generate a paragraph discussing a trending topic in the news as input and categorize it into: politics, technology, sports, or entertainment as output",
-  "Identify and label the named entities in sentences about a travel destination",
-  "Summarize an article in 1-2 sentences and classify the summary as either 'informative' or 'biased'.",
+  "The input is text reviews of movies, with only have two possible output: 'POSITIVE', 'NEGATIVE', indicating whether each review is positive or negative.",
+  "The input is a paragraph discussing a trending topic in the news and the output it one of 4 categories: politics, technology, sports, or entertainment.",
+  "The input is sentences about a travel destination, and the output is all locations and entities.",
+  "The input is an article, and the output is: 1. The summary 2. Classify the summary as either 'informative' or 'biased'.",
+];
+
+export const moreExamplesPrompts = [
+  'Based on the description and the template, provide 5 more examples',
+  'I believe there are more possibilities, provide 5 more',
+  '5 more examples, and no similar data, please',
+  'Please give me 5 more examples, try to have more different kinds of data',
+  'Last 5 more examples',
 ];

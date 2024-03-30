@@ -25,6 +25,8 @@ const nextConfig = {
     postgresPostgresHost: process.env.POSTGRES_HOST,
     postgresPostgresPassword: process.env.POSTGRES_PASSWORD,
     postgresPostgresDatabase: process.env.POSTGRES_DATABASE,
+
+    s3ApiUrl: process.env.S3_API_URL,
   },
 }
 
