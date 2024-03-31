@@ -11,5 +11,5 @@ It is built on Gemini API. Visit https://ai.google.dev/docs/gemini_api_overview 
 1. Describe how your data should be like
 2. Gemini API generates an sample based on the description
 3. If the sample is what you want, click the 'Use sample' button to generate data
-4. It will generate 20-40 more samples in a .txt file
+4. It will generate around 20 more samples in a .txt file
 5. Download the file and use it in your AI model
