@@ -15,7 +15,7 @@ const MobileSidebar = ({ dataList }: { dataList: { id: number, name: string }[] 
         <div className='flex justify-end mb-4'>
           <button className='w-6 h-6 flex items-center p-1' onClick={() => setShowMenu(false)}><Back color='#64748b' /></button>
         </div>
-        {dataList.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded bg-slate-200'>{d.name}</Link>)}
+        {dataList.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded hover:bg-slate-200'>{d.name}</Link>)}
       </aside>
     </>
   )

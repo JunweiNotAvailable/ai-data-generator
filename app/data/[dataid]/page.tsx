@@ -54,7 +54,7 @@ const DataPage = async ({ params }: { params: { dataid: string } }) => {
       <MobileSidebar dataList={dataList} />
       {/* sidebar */}
       <aside className='hidden md:flex flex-col w-56 p-2 scroller sticky top-0'>
-        {dataList.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded bg-slate-200'>{d.name}</Link>)}
+        {dataList.map(d => <Link href={`/data/${d.id}`} key={d.id} className='block mb-2 w-full text-left py-2 px-3 text-sm rounded hover:bg-slate-200'>{d.name}</Link>)}
       </aside>
       {/* main */}
       <main className='flex-1 md:ml-4 px-8 md:my-4 md:pb-4 min-w-0 scroller rounded-md'>
