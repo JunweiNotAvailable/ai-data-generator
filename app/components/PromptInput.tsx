@@ -95,8 +95,8 @@ const PromptInput = ({ initialHistory, unauthenticated }: { initialHistory: Cont
         <textarea rows={1} ref={inputRef} placeholder='Your data prompt' className={`${styles.promptInput} scroller resize-none flex-1 placeholder:text-gray-400 text-sm bg-transparent outline-none`} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} value={promptInput} onInput={handleInput} />
         <button className={`popup-trigger w-4 px-2 py-1 box-content ${promptInput.length === 0 ? '*:stroke-slate-300 *:hover:stroke-slate-300' : '*:stroke-slate-500 *:hover:stroke-slate-800'}`} disabled={promptInput.length === 0} onClick={unauthenticated ? showSignInPopup : sendPrompt}><ArrowRight /></button>
       </div>
-      {showingPopup && <div className='fixed h-screen flex items-center justify-center w-screen top-0 left-0' style={{ background: '#0003' }}>
-        <div className='popup relative bg-white flex flex-col items-center rounded-lg p-4 w-4/5 max-w-96'>
+      {showingPopup && <div className='fixed h-screen flex items-center justify-center w-screen top-0 left-0' style={{ zIndex: 1000, background: '#0003' }}>
+        <div className='popup relative bg-white flex flex-col items-center rounded-lg p-4 w-4/5 max-w-96 z-50'>
           <div className='font-semibold text-xl mt-2'>Sign in</div>
           <div className='mt-2 text-gray-500'>Sign in to generate your custom data</div>
           <div className='mt-8 mb-4'>
