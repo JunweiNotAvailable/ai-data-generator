@@ -14,6 +14,7 @@ const LoadingData = ({ session }: { session: Session }) => {
   // Load all data
   useAsyncEffect(async () => {
     const result: QueryResult<QueryResultRow> = await (await fetch(`/api/data/getalldata?userEmail=${session.user?.email}`)).json();
+    console.log(result)
     if (result.rowCount === 0) { // no custom data
       router.push('/data/empty');
     } else { // return first data page
