@@ -81,3 +81,34 @@
 .flip {
   transform: rotateY(180deg);
 }
+
+.thinLine {
+  flex: 1;
+  height: 1.4px;
+  border-radius: 2rem;
+  background: linear-gradient(-10deg, #f0f2f6, #a3d3fe,#f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6);
+	background-size: 200% 200%;
+  animation-name: transport;
+  animation-duration: 12s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.thinLineSecond {
+  flex: 1;
+  height: 1.4px;
+  border-radius: 2rem;
+  background: linear-gradient(-10deg, #f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6, #f0f2f6, #ffaaaa, #f0f2f6);
+	background-size: 200% 200%;
+  animation-name: transport;
+  animation-duration: 12s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes transport {
+  0% {
+    background-position: 600% 50%;
+	}
+  100% {
+    background-position: 0% 50%;
+  }
+}

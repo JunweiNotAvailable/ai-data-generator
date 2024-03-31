@@ -20,6 +20,12 @@ input, button, textarea, .transition-2 {
   border: 3px solid transparent;
   background-clip: padding-box;
 }
+.scroller-dark::-webkit-scrollbar-thumb {
+  background: #42434588;
+  border-radius: 1rem;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
 .scroller-light::-webkit-scrollbar {
   width: 10px;
 }
@@ -104,4 +110,10 @@ ol {
 }
 .markdown-content.small h3 {
   font-size: 16px !important;
+}
+
+@media screen and (max-width: 960px) {
+  .scroller::-webkit-scrollbar {
+    width: 0;
+  }
 }

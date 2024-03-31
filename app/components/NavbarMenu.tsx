@@ -31,11 +31,11 @@ const NavbarMenu = () => {
           </div>
           <Link className='nav-button flex items-center text-sm w-full py-2 px-5 text-slate-600 hover:bg-slate-100' href={'/'}><span className='block w-3.5 mr-2'><Logo color='#475569' /></span>Chat</Link>
           <Link className='nav-button flex items-center text-sm w-full py-2 px-5 text-slate-600 hover:bg-slate-100' href={'/data'}><span className='block h-3.5 w-3.5 mr-2'><Data color='#475569' /></span>Data</Link>
-          <button className='nav-button flex items-center text-sm w-full py-2 px-5 text-slate-600 hover:bg-slate-100' onClick={() => signOut()}><span className='block h-3.5 w-3.5 mr-2'><Exit color='#475569' /></span>Log out</button>
+          <button className='nav-button flex items-center text-sm w-full py-2 px-5 text-slate-600 hover:bg-slate-100' onClick={() => signOut()}><span className='block h-3.5 w-3.5 mr-2'><Exit color='#475569' /></span>Sign out</button>
         </nav>}
       </div>
       : status === 'unauthenticated' ?
-        <button className='flex items-center border text-sm py-1 px-4 rounded border-slate-300 hover:bg-slate-100 text-slate-600 font-bold' onClick={() => signIn('github')}><span className='block w-4 mr-2'><Github /></span>Log in</button>
+        <button className='flex items-center border text-sm py-1 px-4 rounded border-slate-300 hover:bg-slate-100 text-github font-semibold' onClick={() => signIn('github')}><span className='block w-4 mr-2'><Github /></span>Sign in</button>
         :
         <></>
   )

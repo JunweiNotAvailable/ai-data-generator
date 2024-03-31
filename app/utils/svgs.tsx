@@ -109,3 +109,47 @@ export const Back = ({ color }: { color?: string }) => {
     </svg>
   )
 }
+
+export const Close = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 62 63" fill="none">
+      <path d="M4.05672 57.6933L57.4433 4.30674" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+      <path d="M4 5L57.3866 58.3866" stroke={color || "black"} strokeWidth="8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export const TxtFile = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 32 41" fill="none">
+      <path d="M16.5 4H3C1.89543 4 1 4.89543 1 6V37.8979C1 39.0025 1.89543 39.8979 3 39.8979H28.9389C30.0434 39.8979 30.9389 39.0025 30.9389 37.8979L30.9389 9" stroke={color || "black"} strokeLinecap="round" />
+      <path d="M6 11H19.7395" stroke={color || "black"} strokeLinecap="round" />
+      <path d="M6 16H16.8201" stroke={color || "black"} strokeLinecap="round" />
+      <path d="M6 25H19.7395" stroke={color || "black"} strokeLinecap="round" />
+      <path d="M6 30H16.8201" stroke={color || "black"} strokeLinecap="round" />
+      <path d="M23.4203 2.47959V3.39636H21.1008V2.47959H23.4203ZM21.5501 1.63616H22.8152V4.86779C22.8152 4.91668 22.8236 4.95793 22.8404 4.99155C22.8572 5.02364 22.8832 5.04808 22.9183 5.06489C22.9535 5.08017 22.9986 5.08781 23.0536 5.08781C23.0918 5.08781 23.1361 5.08323 23.1865 5.07406C23.2385 5.06489 23.2767 5.05725 23.3011 5.05114L23.4845 5.94041C23.4279 5.95722 23.3469 5.97784 23.2415 6.00229C23.1376 6.02674 23.0138 6.04278 22.8702 6.05042C22.5799 6.0657 22.3362 6.03591 22.1391 5.96104C21.942 5.88464 21.7938 5.76469 21.6945 5.6012C21.5951 5.43771 21.547 5.23297 21.5501 4.98697V1.63616ZM25.0275 2.47959L25.5409 3.57055L26.0818 2.47959H27.3378L26.3935 4.2398L27.3836 6H26.1368L25.5409 4.88154L24.9633 6H23.6982L24.6975 4.2398L23.7624 2.47959H25.0275ZM29.887 2.47959V3.39636H27.5675V2.47959H29.887ZM28.0168 1.63616H29.2819V4.86779C29.2819 4.91668 29.2903 4.95793 29.3071 4.99155C29.3239 5.02364 29.3499 5.04808 29.385 5.06489C29.4202 5.08017 29.4653 5.08781 29.5203 5.08781C29.5585 5.08781 29.6028 5.08323 29.6532 5.07406C29.7051 5.06489 29.7433 5.05725 29.7678 5.05114L29.9511 5.94041C29.8946 5.95722 29.8136 5.97784 29.7082 6.00229C29.6043 6.02674 29.4805 6.04278 29.3369 6.05042C29.0466 6.0657 28.8029 6.03591 28.6058 5.96104C28.4087 5.88464 28.2605 5.76469 28.1611 5.6012C28.0618 5.43771 28.0137 5.23297 28.0168 4.98697V1.63616Z" fill={color || "black"} />
+    </svg>
+  )
+}
+
+export const Network = ({ color }: { color?: string }) => {
+  return (
+    <svg width="100%" viewBox="0 0 34 32" fill="none">
+      <circle cx="3" cy="10" r="1.66667" stroke={color || 'black'} strokeWidth="0.666667" />
+      <circle cx="2" cy="25" r="1.66667" stroke={color || 'black'} strokeWidth="0.666667" />
+      <circle cx="17" cy="2" r="1.66667" stroke={color || 'black'} strokeWidth="0.666667" />
+      <circle cx="16" cy="15" r="2.5" stroke={color || 'black'} />
+      <circle cx="16.5" cy="29.5" r="2.08333" stroke={color || 'black'} strokeWidth="0.833333" />
+      <circle cx="31.5" cy="17.5" r="2.08333" stroke={color || 'black'} strokeWidth="0.833333" />
+      <path d="M4.58643 10.2654C4.45687 10.2177 4.31315 10.284 4.26541 10.4136C4.21768 10.5431 4.28402 10.6869 4.41357 10.7346L4.58643 10.2654ZM4.41357 10.7346L13.9136 14.2346L14.0864 13.7654L4.58643 10.2654L4.41357 10.7346Z" fill={color || 'black'} />
+      <path d="M3.5 25.5L14.5 29" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M4.5 9.5L15.5 3" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M4 11.5L15 28" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M3 23.5L15.5 3" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M18.5 3L30 16" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M18.5 15.5L29 17.5" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M18.5 29L29.5 19" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+      <path d="M16 18L16.5 27.5" stroke={color || 'black'} strokeWidth="0.5" strokeLinecap="round" />
+    </svg>
+  )
+}

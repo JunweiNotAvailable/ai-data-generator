@@ -18,11 +18,11 @@ const config: Config = {
       },
       colors: {
         'github': '#24292E'
+      },
+      screens: {
+        md: '960px',
       }
     },
-    screens: {
-      md: '960px',
-    }
   },
   plugins: [],
 }

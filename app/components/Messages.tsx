@@ -47,6 +47,7 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
   const deleteHistory = async () => {
     setDeleting(true);
     await fetch(`/api/data/deletechat?chatName=New%20Data%20Chat&userEmail=${session?.user?.email}`, { method: 'DELETE' });
+    setHistory([]);
     router.refresh();
     setDeleting(false);
   }
