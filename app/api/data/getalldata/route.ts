@@ -7,8 +7,9 @@ export async function GET (request: Request) {
     if (userEmail) {
       const result = await getAllData(userEmail);
       return new Response(JSON.stringify(result))
+    } else {
+      return new NextResponse(JSON.stringify({ error: "Failed getting params" }))
     }
-    return new NextResponse(JSON.stringify({ error: "Failed getting data" }))
   } catch (error) {
     return new NextResponse(JSON.stringify({ error: 'Failed getting data' }))
   }
