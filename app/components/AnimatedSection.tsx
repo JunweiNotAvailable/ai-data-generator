@@ -11,14 +11,14 @@ const AnimatedSection = () => {
   return (
     <section className='px-4 md:px-12 flex md:flex-row flex-col' style={{ height: '200%' }}>
       <div className='h-full w-full flex flex-col md:w-2/5'>
-        <InView threshold={.7}>
+        <InView threshold={[.2, .8]}>
           {({ inView, ref }) =>
             <motion.div ref={ref} animate={{ opacity: inView ? 1 : 0 }} transition={{ duration: .2 }} className='flex-1 w-full md:mt-20'>
-              <div className='text-3xl font-semibold sticky md:top-20'>Create data samples with descriptions.</div>
+              <div className='text-3xl font-semibold mt-20 md:top-20'>Create data samples with descriptions.</div>
             </motion.div>
           }
         </InView>
-        <InView threshold={.7}>
+        <InView threshold={[.2, .8]}>
           {({ inView, ref }) =>
             <motion.div ref={ref} animate={{ opacity: inView ? 1 : 0 }} transition={{ duration: .2 }} className='flex-1 w-full md:mt-20'>
               <div className='text-3xl font-semibold'>Scale up and export to your AI model.</div>
