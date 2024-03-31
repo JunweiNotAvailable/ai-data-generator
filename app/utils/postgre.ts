@@ -41,7 +41,7 @@ export const insertMessage = async (chatName: string, messages: Content[], userE
   const messagesJson = JSON.stringify(messages);
   try {
     // console.log(`UPDATE chat SET history = history || ${messagesJson} WHERE name = ${chatName} AND user_email = ${userEmail}`)
-    await client.sql`UPDATE chat SET history = history || ${messagesJson} WHERE name = ${chatName} AND user_email = ${userEmail}`;
+    await client.sql`UPDATE chat SET history = history || ${messagesJson} WHERE name = '${chatName}' AND user_email = '${userEmail}'`;
   } catch (error) {
     console.log(error);
     throw new Error('Error inserting message');
@@ -69,7 +69,7 @@ export const getChatId = async (chatName: string, userEmail: string) => {
   const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
   await client.connect();
   try {
-    const result = await client.sql`SELECT id FROM chat WHERE name = ${chatName} AND user_email = ${userEmail}`;
+    const result = await client.sql`SELECT id FROM chat WHERE name = '${chatName}' AND user_email = '${userEmail}'`;
     return result
   } catch (error) {
     console.error(error);
@@ -83,7 +83,7 @@ export const getChatHistory = async (chatName: string, userEmail: string) => {
   const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
   await client.connect();
   try {
-    const result = await client.sql`SELECT history FROM chat WHERE name = ${chatName} AND user_email = ${userEmail}`;
+    const result = await client.sql`SELECT history FROM chat WHERE name = '${chatName}' AND user_email = '${userEmail}'`;
     return result
   } catch (error) {
     console.error(error);
@@ -97,7 +97,7 @@ export const getAllData = async (userEmail: string) => {
   const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
   await client.connect();
   try {
-    const result = await client.sql`SELECT id, name FROM data WHERE user_email = ${userEmail}`;
+    const result = await client.sql`SELECT id, name FROM data WHERE user_email = '${userEmail}'`;
     return result;
   } catch (error) {
     console.error(error);
@@ -127,7 +127,7 @@ export const deleteChat = async (chatName: string, userEmail: string) => {
   const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
   await client.connect();
   try {
-    await client.sql`DELETE FROM chat WHERE name = ${chatName} AND user_email = ${userEmail}`;
+    await client.sql`DELETE FROM chat WHERE name = '${chatName}' AND user_email = '${userEmail}'`;
   } catch (error) {
     console.error(error);
     throw new Error('Error getting history');
