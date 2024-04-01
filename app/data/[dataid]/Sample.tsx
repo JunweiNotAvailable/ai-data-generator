@@ -23,7 +23,7 @@ const Sample = ({ data }: { data: DataProps }) => {
         <div className={`${styles.front} absolute scroller scroller-light h-full w-full rounded py-2 px-3 bg-white border shadow-sm`}>
           <MarkdownClient className={'markdown-content small'} source={data.sample} />
         </div>
-        <div className={`${styles.back} absolute scroller scroller-light h-full w-full rounded py-2 px-3 bg-white border shadow-sm`}>
+        <div className={`${styles.back} ${showing === 'markdown' ? 'z-0' : '-z-20'} absolute scroller scroller-light h-full w-full rounded py-2 px-3 bg-white border shadow-sm`}>
           <div className='text-xs whitespace-pre-wrap'>{data.sample}</div>
         </div>
       </div>
