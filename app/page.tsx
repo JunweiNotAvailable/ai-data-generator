@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { Content } from '@google/generative-ai';
 import { getChatHistory } from './utils/postgre';
 import LandingPage from './LandingPage';
-import ChatContent from './components/ChatContent';
+import LandingPageClient from './LandingPageClient';
 
 const Home = async () => {
 
@@ -15,20 +15,8 @@ const Home = async () => {
     if (res.rows?.[0]) {
       initialHistory = res.rows[0].history;
     }
-    // return chat content if history is not empty
-    if (initialHistory.length > 0) {
-      return (
-        <div className='flex flex-1 overflow-hidden w-screen'>
-          <main className='flex-1 flex justify-center items-center w-full'>
-            <div className='transition-2 flex flex-col justify-center items-center w-full h-full'>
-              <ChatContent initialHistory={initialHistory} />
-            </div>
-          </main>
-        </div>
-      )
-    }
-
-    return <LandingPage />
+    
+    return <LandingPageClient initialHistory={initialHistory} />
   }
 
   return (

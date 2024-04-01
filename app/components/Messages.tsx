@@ -30,11 +30,6 @@ const Messages = ({ initialHistory }: { initialHistory: Content[] }) => {
     }
   });
 
-  // Setup initial history messages
-  useEffect(() => {
-    setHistory(initialHistory);
-  }, [initialHistory]);
-
   // scroll to bottom when history changes
   useEffect(() => {
     if (!messagesRef.current) return;
