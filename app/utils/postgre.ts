@@ -63,6 +63,19 @@ export const updateDataStep = async (id: string, step: number) => {
   }
 }
 
+export const updateDataName = async (id: string, name: string) => {
+  const client = createClient({ connectionString: process.env.postgresUrlNonPooling });
+  await client.connect();
+  try {
+    await client.sql`UPDATE data SET name = ${name} WHERE id = ${id}`;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error inserting message');
+  } finally {
+    await client.end();
+  }
+}
+
 ////// GET //////
 
 export const getChatId = async (chatName: string, userEmail: string) => {

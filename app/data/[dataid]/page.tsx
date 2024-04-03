@@ -10,6 +10,7 @@ import Sample from './Sample';
 import DataResult from '../../components/DataResult';
 import DataProcess from '@/app/components/DataProcess';
 import MobileSidebar from './MobileSidebar';
+import DataName from '@/app/components/DataName';
 
 const DataPage = async ({ params }: { params: { dataid: string } }) => {
 
@@ -59,7 +60,7 @@ const DataPage = async ({ params }: { params: { dataid: string } }) => {
       {/* main */}
       <main className='flex-1 md:ml-4 px-8 md:my-4 md:pb-4 min-w-0 scroller rounded-md'>
         {data.generating_step <= 100 && <DataProcess data={data} />}
-        <h2 className='font-bold text-lg'>{data.name}</h2>
+        <DataName data={data} />
         {/* prompt */}
         <div className='text-sm font-semibold mt-4'>Prompt</div>
         <div className='rounded py-2 px-3 bg-white border shadow-sm mt-1'>
